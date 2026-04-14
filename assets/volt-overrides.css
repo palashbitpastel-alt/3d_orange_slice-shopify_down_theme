@@ -141,21 +141,6 @@ input[type="number"], textarea, select {
 }
 ::placeholder { color: rgba(255,255,255,0.3) !important; }
 
-/* ---- Header / Nav ---- */
-.header, .section-header {
-  background: #050505 !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
-.header__heading-link { color: #FFFFFF !important; }
-.header__menu-item, .list-menu__item {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 12px !important;
-  text-transform: uppercase !important;
-  color: #FFFFFF !important;
-}
-.header__menu-item:hover, .list-menu__item:hover { color: #ccff00 !important; }
-.header__icon { color: #FFFFFF !important; }
-
 /* ---- Footer ---- */
 .footer, .section-footer {
   background: #000 !important;
