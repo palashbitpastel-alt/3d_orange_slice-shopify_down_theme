@@ -1,0 +1,250 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Inter:wght@400;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ 'hero-glitch.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'products.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'footer.css' | asset_url }}">
+
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+<script type="module" src="{{ 'carousel.js' | asset_url }}"></script>
+
+<style>
+    /* Smooth Scroll */
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    
+    /* Nav Overlay */
+    .nav-container {
+        position: absolute; top: 0; width: 100%; z-index: 100;
+        padding: 30px 60px; display: flex; justify-content: space-between;
+        align-items: center; mix-blend-mode: exclusion;
+    }
+    .logo {
+        font-family: 'Teko', sans-serif; font-size: 40px; font-weight: 600;
+        color: #FFF; text-decoration: none; letter-spacing: 0.1em;
+    }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-link {
+        font-family: 'JetBrains Mono', monospace; font-size: 12px;
+        color: #FFF; text-decoration: none; text-transform: uppercase;
+    }
+    
+    /* Video Sections */
+    .full-video-section {
+        position: relative; height: 80vh; overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .full-video-bg {
+        position: absolute; width: 100%; height: 100%; object-fit: cover;
+        filter: grayscale(100%) contrast(1.2); opacity: 0.6;
+    }
+    .overlay-content {
+        position: relative; z-index: 2; text-align: center;
+    }
+    .stat-grid {
+        display: flex; gap: 60px; margin-top: 40px;
+    }
+    .stat-item h3 {
+        font-family: 'Teko', sans-serif; font-size: 80px; margin: 0;
+        color: var(--color-neon-green); line-height: 1;
+    }
+    .stat-item p {
+        font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #FFF;
+    }
+</style>
+
+<div class="volt-theme">
+<nav class="nav-container">
+    <a href="#" class="logo">VOLT⚡</a>
+    <div class="nav-links">
+        <a href="#" class="nav-link">Products</a>
+        <a href="#" class="nav-link">Science</a>
+        <a href="#" class="nav-link">Team</a>
+    </div>
+    <button style="background:none; border:1px solid #FFF; padding:8px 20px; color:#FFF; font-family:'JetBrains Mono', monospace; cursor:pointer;" onclick="document.getElementById('cart').showModal()">CART</button>
+</nav>
+
+<script>
+    const lenis = new Lenis();
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+</script>
+
+<section class="hero-carousel">
+    <div class="carousel-container">
+        
+        <div class="carousel-slide active">
+            <video class="carousel-video" autoplay loop muted playsinline src="{{ 'Energy_explosion_shockwave_202604141419.mp4' | asset_url }}"></video>
+            <div class="carousel-content-split">
+                <div class="hero-top-left">
+                    <div class="carousel-label">FORMULA 01</div>
+                    <h1 class="carousel-headline">SYSTEM<br>OVERLOAD</h1>
+                </div>
+                <div class="hero-bottom-right">
+                    <p class="carousel-tagline">Original Citrus Blend</p>
+                    <p class="carousel-description">200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.</p>
+                    <div class="carousel-price">
+                        <span class="price-amount">$34</span><span class="price-unit">/ 12 Pack</span>
+                    </div>
+                    <div class="carousel-cta">
+                        <button class="btn-primary" onclick="scrollToProducts()">INITIATE ORDER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <video class="carousel-video" loop muted playsinline src="{{ 'Blue_ice_freezing_202604141348.mp4' | asset_url }}"></video>
+            <div class="carousel-content-split">
+                <div class="hero-top-left">
+                    <div class="carousel-label" style="color:var(--color-electric-blue)">FORMULA 02</div>
+                    <h1 class="carousel-headline">CRYOGENIC<br>FREEZE</h1>
+                </div>
+                <div class="hero-bottom-right">
+                    <p class="carousel-tagline">Blue Raspberry Ice</p>
+                    <p class="carousel-description">Enhanced with Nootropics for laser focus during extended gaming or coding sessions.</p>
+                    <div class="carousel-price">
+                        <span class="price-amount">$34</span><span class="price-unit">/ 12 Pack</span>
+                    </div>
+                    <div class="carousel-cta">
+                        <button class="btn-primary" style="background:var(--color-electric-blue)" onclick="scrollToProducts()">INITIATE ORDER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-slide">
+            <video class="carousel-video" loop muted playsinline src="{{ 'Flight_through_neon_202604141357.mp4' | asset_url }}"></video>
+            <div class="carousel-content-split">
+                <div class="hero-top-left">
+                    <div class="carousel-label" style="color:var(--color-cyber-purple)">FORMULA 03</div>
+                    <h1 class="carousel-headline">NEON<br>DRIVE</h1>
+                </div>
+                <div class="hero-bottom-right">
+                    <p class="carousel-tagline">Grape Electrolyte</p>
+                    <p class="carousel-description">Rapid hydration matrix designed for physical endurance and recovery.</p>
+                    <div class="carousel-cta">
+                        <button class="btn-primary" style="background:var(--color-cyber-purple); color:#FFF;" onclick="scrollToProducts()">INITIATE ORDER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="carousel-nav carousel-nav--prev" onclick="prevSlide()">&larr;</button>
+    <button class="carousel-nav carousel-nav--next" onclick="nextSlide()">&rarr;</button>
+    <div class="carousel-pagination">
+        <button class="pagination-dot active" onclick="goToSlide(0)"></button>
+        <button class="pagination-dot" onclick="goToSlide(1)"></button>
+        <button class="pagination-dot" onclick="goToSlide(2)"></button>
+    </div>
+</section>
+
+<section class="full-video-section">
+    <video class="full-video-bg" autoplay loop muted playsinline src="https://videos.pexels.com/video-files/853813/853813-hd_1920_1080_25fps.mp4"></video>
+    <div class="overlay-content">
+        <h2 class="carousel-headline" style="font-size: 60px;">PERFORMANCE METRICS</h2>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <h3>200<span style="font-size:30px">MG</span></h3>
+                <p>CAFFEINE ANHYDROUS</p>
+            </div>
+            <div class="stat-item">
+                <h3>0<span style="font-size:30px">G</span></h3>
+                <p>SUGAR CONTENT</p>
+            </div>
+            <div class="stat-item">
+                <h3>100<span style="font-size:30px">%</span></h3>
+                <p>FOCUS RETENTION</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="products" class="products-section">
+    <div class="container-volt">
+        <div class="section-header">
+            <div>
+                <div class="section-label">// CATALOG_V1.0</div>
+                <h2 class="section-headline">SELECT FUEL</h2>
+            </div>
+        </div>
+        
+        <div class="products-grid">
+            <shopify-store store-domain="palashstor.myshopify.com" public-access-token="7e706483ff729f77a768614acd45fdc0" country="US">
+                <shopify-cart id="cart"></shopify-cart>
+                <shopify-list-context type="product" query="products" first="3">
+                    <template>
+                        <div class="product-card">
+                            <a shopify-attr--href="'/products/' + product.handle" style="text-decoration:none;">
+                                <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?q=80&w=600&auto=format&fit=crop" class="product-card__image" alt="Can">
+                                <div class="product-card__content">
+                                    <div class="product-card__title"><shopify-data query="product.title"></shopify-data></div>
+                                    <div class="product-card__price"><shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money></div>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                </shopify-list-context>
+            </shopify-store>
+            
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?w=600" class="product-card__image">
+                <div class="product-card__content">
+                    <div class="product-card__title">SYSTEM OVERLOAD</div>
+                    <div class="product-card__price">$34.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=600" class="product-card__image" style="filter: hue-rotate(180deg);">
+                <div class="product-card__content">
+                    <div class="product-card__title">CRYOGENIC FREEZE</div>
+                    <div class="product-card__price">$34.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1613206472107-b48d885540d9?w=600" class="product-card__image" style="filter: hue-rotate(270deg);">
+                <div class="product-card__content">
+                    <div class="product-card__title">NEON DRIVE</div>
+                    <div class="product-card__price">$34.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="big-footer">
+    <div class="footer-top">
+        <div class="footer-col">
+            <h4>// NAVIGATION</h4>
+            <a href="#">Shop All</a>
+            <a href="#">Science</a>
+            <a href="#">Athletes</a>
+        </div>
+        <div class="footer-col">
+            <h4>// LEGAL</h4>
+            <a href="#">Privacy Protocol</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="footer-col">
+            <h4>// SOCIAL</h4>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+        </div>
+    </div>
+    <div class="footer-brand-title">VOLT ENERGY</div>
+</footer>
+</div>
+
+{% schema %}
+{
+  "name": "Volt Home",
+  "presets": [
+    {
+      "name": "Volt Home"
+    }
+  ]
+}
+{% endschema %}
