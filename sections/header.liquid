@@ -71,82 +71,133 @@
     }
   }
 
-  /* VOLT: Transparent Glassmorphism Header */
+  /* VOLT: Transparent Glassmorphism Sticky Header */
   .section-header {
     position: fixed !important;
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     z-index: 1000 !important;
     background: transparent !important;
     border: none !important;
-    padding: 16px 24px !important;
-    pointer-events: none;
-  }
-  .section-header > * {
-    pointer-events: auto;
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
   }
   .header-wrapper {
     background: transparent !important;
     border: none !important;
+    border-bottom: none !important;
+    padding: 16px 24px !important;
   }
   .header {
-    background: rgba(0, 0, 0, 0.45) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 0.5px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
     border-radius: 100px !important;
-    padding: 8px 30px !important;
-    max-width: 1400px;
+    padding: 0 12px 0 28px !important;
+    max-width: 1200px;
     margin: 0 auto;
-    height: 60px;
+    height: 56px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px;
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
-  /* Scrolled state — slightly more opaque */
+  /* Scrolled state */
   .shopify-section-header-sticky .header {
-    background: rgba(0, 0, 0, 0.7) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
   }
-  /* Offset body for fixed header */
-  .content-for-layout {
-    padding-top: 0 !important;
+  /* Reset Dawn page-width inside pill */
+  .header.page-width {
+    max-width: 1200px;
+    padding: 0 12px 0 28px !important;
+  }
+  /* Logo */
+  .header__heading {
+    margin: 0;
   }
   .header__heading-link, .header__heading-link .h2 {
     font-family: 'Teko', sans-serif !important;
-    font-size: 36px !important;
+    font-size: 32px !important;
     font-weight: 600 !important;
     color: #FFFFFF !important;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-decoration: none !important;
     line-height: 1;
+    white-space: nowrap;
+  }
+  .header__heading-logo {
+    max-height: 36px !important;
+    width: auto !important;
+  }
+  /* Nav items */
+  .header__inline-menu {
+    display: flex;
+    align-items: center;
   }
   .header__menu-item, .list-menu__item--link,
   .header__menu-item span {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #FFFFFF !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     transition: color 0.2s;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 56px !important;
   }
   .header__menu-item:hover, .list-menu__item--link:hover {
     color: #ccff00 !important;
   }
+  /* Icons */
+  .header__icons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px;
+    flex-shrink: 0;
+  }
   .header__icon {
     color: #FFFFFF !important;
     transition: color 0.2s;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .header__icon:hover {
     color: #ccff00 !important;
+  }
+  .header__icon .icon {
+    width: 20px;
+    height: 20px;
   }
   .cart-count-bubble {
     background: #ccff00 !important;
     color: #050505 !important;
     font-family: 'JetBrains Mono', monospace !important;
     font-weight: 700;
+    font-size: 10px !important;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 50%;
+    top: -4px;
+    right: -4px;
   }
-  /* VOLT: Drawer */
+  /* Hide header border line separator */
+  .header-wrapper--border-bottom {
+    border-bottom: none !important;
+  }
+  /* Drawer */
   .menu-drawer, .menu-drawer__inner-container {
     background: #0a0a0a !important;
     color: #FFFFFF !important;
@@ -160,7 +211,7 @@
   .menu-drawer__menu-item:hover {
     color: #ccff00 !important;
   }
-  /* VOLT: Search modal */
+  /* Search modal */
   .search-modal, .header__search {
     background: #0a0a0a !important;
     color: #FFFFFF !important;
@@ -170,16 +221,18 @@
     border: 1px solid rgba(255,255,255,0.15) !important;
     color: #FFFFFF !important;
     font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
   }
   .search-modal__form .search__button {
     color: #ccff00 !important;
   }
-  /* VOLT: Predictive search */
+  /* Predictive search dropdown */
   .predictive-search {
     background: #121212 !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     color: #FFFFFF !important;
     border-radius: 16px !important;
+    margin-top: 8px;
   }
   .predictive-search__heading {
     font-family: 'JetBrains Mono', monospace !important;
@@ -191,20 +244,26 @@
     text-transform: uppercase;
     color: #FFFFFF !important;
   }
-  /* VOLT: Announcement bar inside glass header */
+  /* Announcement bar */
   .announcement-bar {
     border-radius: 100px;
     margin-bottom: 8px;
   }
-  /* Mobile adjustments */
+  /* Mobile */
   @media screen and (max-width: 989px) {
-    .section-header {
+    .header-wrapper {
       padding: 10px 12px !important;
     }
     .header {
-      height: 52px;
-      padding: 6px 16px !important;
+      height: 50px;
+      padding: 0 10px 0 18px !important;
       border-radius: 60px !important;
+    }
+    .header__heading-link .h2 {
+      font-size: 26px !important;
+    }
+    .header__heading-logo {
+      max-height: 28px !important;
     }
   }
 </style>
