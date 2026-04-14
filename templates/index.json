@@ -188,42 +188,11 @@
     },
     "volt_products_AMBVgL": {
       "type": "volt-products",
-      "blocks": {
-        "card_nPBTEd": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/Whisk_1864eb9fbdd91409f9d47ecd5730dc1bdr.jpg",
-            "title": "SYSTEM OVERLOAD",
-            "price": "$34.00"
-          }
-        },
-        "card_nPag7C": {
-          "type": "card",
-          "settings": {
-            "title": "CRYOGENIC FREEZE",
-            "price": "$34.00"
-          }
-        },
-        "card_6VtfbR": {
-          "type": "card",
-          "settings": {
-            "title": "NEON DRIVE",
-            "price": "$34.00"
-          }
-        }
-      },
-      "block_order": [
-        "card_nPBTEd",
-        "card_nPag7C",
-        "card_6VtfbR"
-      ],
       "name": "Volt Products",
       "settings": {
         "label": "// CATALOG_V1.0",
         "heading": "SELECT FUEL",
-        "storefront_domain": "palashstor.myshopify.com",
-        "storefront_token": "7e706483ff729f77a768614acd45fdc0",
-        "storefront_country": "US",
+        "collection": "volt-drinks",
         "products_count": 3
       }
     },
