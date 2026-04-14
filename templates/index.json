@@ -135,6 +135,20 @@
     "volt_hero_carousel_fPLVXH": {
       "type": "volt-hero-carousel",
       "blocks": {
+        "slide_T49Rjf": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/Flight_through_neon_202604141357.mp4",
+            "label": "FORMULA 01",
+            "headline": "SYSTEMOVERLOAD",
+            "tagline": "Original Citrus Blend",
+            "description": "200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER",
+            "accent_color": ""
+          }
+        },
         "slide_DwKFxg": {
           "type": "slide",
           "settings": {
@@ -162,25 +176,12 @@
             "button_text": "INITIATE ORDER",
             "accent_color": ""
           }
-        },
-        "slide_G6n3F6": {
-          "type": "slide",
-          "settings": {
-            "label": "FORMULA 02",
-            "headline": "CRYOGENIC<br>FREEZE",
-            "tagline": "Blue Raspberry Ice",
-            "description": "Enhanced with Nootropics for laser focus during extended gaming or coding sessions.",
-            "price": "$34",
-            "price_unit": "12 Pack",
-            "button_text": "INITIATE ORDER",
-            "accent_color": ""
-          }
         }
       },
       "block_order": [
+        "slide_T49Rjf",
         "slide_DwKFxg",
-        "slide_jybW3k",
-        "slide_G6n3F6"
+        "slide_jybW3k"
       ],
       "name": "Volt Hero Carousel",
       "settings": {}
