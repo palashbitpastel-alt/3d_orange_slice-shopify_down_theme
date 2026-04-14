@@ -1,1 +1,289 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"Browse our latest products","heading_size":"h0"}},"button":{"type":"buttons","settings":{"button_label_1":"Shop all","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading","button"],"settings":{"image_overlay_opacity":40,"image_height":"large","desktop_content_position":"bottom-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-3","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"featured_collection":{"type":"featured-collection","settings":{"title":"Featured products","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"all","products_to_show":8,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}},"slideshow_n79Hbg":{"type":"slideshow","blocks":{"slide_7MixRF":{"type":"slide","settings":{"heading":"Image slide","heading_size":"h1","subheading":"Tell your brand's story through images","button_label":"Button label","link":"","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","text_alignment_mobile":"center"}},"slide_wbEqPF":{"type":"slide","settings":{"heading":"Image slide","heading_size":"h1","subheading":"Tell your brand's story through images","button_label":"Button label","link":"","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","text_alignment_mobile":"center"}}},"block_order":["slide_7MixRF","slide_wbEqPF"],"settings":{"layout":"full_bleed","slide_height":"adapt_image","slider_visual":"dots","auto_rotate":true,"change_slides_speed":3,"image_behavior":"ambient","show_text_below":true,"accessibility_info":"Slideshow about our brand"}}},"order":["image_banner","featured_collection","slideshow_n79Hbg"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "bottom-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "slideshow_n79Hbg": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_7MixRF": {
+          "type": "slide",
+          "settings": {
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_wbEqPF": {
+          "type": "slide",
+          "settings": {
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_7MixRF",
+        "slide_wbEqPF"
+      ],
+      "disabled": true,
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "image_behavior": "ambient",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "volt_hero_carousel_fPLVXH": {
+      "type": "volt-hero-carousel",
+      "blocks": {
+        "slide_DwKFxg": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/Energy_explosion_shockwave_202604141419 (1).mp4",
+            "label": "FORMULA 01",
+            "headline": "SYSTEMOVERLOAD",
+            "tagline": "Original Citrus Blend",
+            "description": "200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER",
+            "accent_color": ""
+          }
+        },
+        "slide_jybW3k": {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 01",
+            "headline": "SYSTEM<br>OVERLOAD",
+            "tagline": "Original Citrus Blend",
+            "description": "200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER",
+            "accent_color": ""
+          }
+        },
+        "slide_G6n3F6": {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 02",
+            "headline": "CRYOGENIC<br>FREEZE",
+            "tagline": "Blue Raspberry Ice",
+            "description": "Enhanced with Nootropics for laser focus during extended gaming or coding sessions.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER",
+            "accent_color": ""
+          }
+        },
+        "slide_LaE4Y3": {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 03",
+            "headline": "NEON<br>DRIVE",
+            "tagline": "Grape Electrolyte",
+            "description": "Rapid hydration matrix designed for physical endurance and recovery.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER",
+            "accent_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_DwKFxg",
+        "slide_jybW3k",
+        "slide_G6n3F6",
+        "slide_LaE4Y3"
+      ],
+      "name": "Volt Hero Carousel",
+      "settings": {}
+    },
+    "volt_products_AMBVgL": {
+      "type": "volt-products",
+      "blocks": {
+        "card_nPBTEd": {
+          "type": "card",
+          "settings": {
+            "title": "SYSTEM OVERLOAD",
+            "price": "$34.00"
+          }
+        },
+        "card_nPag7C": {
+          "type": "card",
+          "settings": {
+            "title": "CRYOGENIC FREEZE",
+            "price": "$34.00"
+          }
+        },
+        "card_6VtfbR": {
+          "type": "card",
+          "settings": {
+            "title": "NEON DRIVE",
+            "price": "$34.00"
+          }
+        }
+      },
+      "block_order": [
+        "card_nPBTEd",
+        "card_nPag7C",
+        "card_6VtfbR"
+      ],
+      "name": "Volt Products",
+      "settings": {
+        "label": "// CATALOG_V1.0",
+        "heading": "SELECT FUEL",
+        "storefront_domain": "palashstor.myshopify.com",
+        "storefront_token": "7e706483ff729f77a768614acd45fdc0",
+        "storefront_country": "US",
+        "products_count": 3
+      }
+    },
+    "volt_stats_X7W67D": {
+      "type": "volt-stats",
+      "blocks": {
+        "stat_PzhgYz": {
+          "type": "stat",
+          "settings": {
+            "value": "200",
+            "unit": "MG",
+            "label": "CAFFEINE ANHYDROUS"
+          }
+        },
+        "stat_rnHxC9": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "unit": "G",
+            "label": "SUGAR CONTENT"
+          }
+        },
+        "stat_7DBgKQ": {
+          "type": "stat",
+          "settings": {
+            "value": "100",
+            "unit": "%",
+            "label": "FOCUS RETENTION"
+          }
+        }
+      },
+      "block_order": [
+        "stat_PzhgYz",
+        "stat_rnHxC9",
+        "stat_7DBgKQ"
+      ],
+      "name": "Volt Stats",
+      "settings": {
+        "video_url": "https://videos.pexels.com/video-files/853813/853813-hd_1920_1080_25fps.mp4",
+        "heading": "PERFORMANCE METRICS"
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "featured_collection",
+    "slideshow_n79Hbg",
+    "volt_hero_carousel_fPLVXH",
+    "volt_products_AMBVgL",
+    "volt_stats_X7W67D"
+  ]
+}
