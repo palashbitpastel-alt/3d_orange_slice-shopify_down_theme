@@ -3,7 +3,6 @@
 
 <link rel="stylesheet" href="{{ 'hero-glitch.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'products.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'footer.css' | asset_url }}">
 
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
@@ -13,23 +12,7 @@
     /* Smooth Scroll */
     html.lenis { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto; }
-    
-    /* Nav Overlay */
-    .nav-container {
-        position: absolute; top: 0; width: 100%; z-index: 100;
-        padding: 30px 60px; display: flex; justify-content: space-between;
-        align-items: center; mix-blend-mode: exclusion;
-    }
-    .logo {
-        font-family: 'Teko', sans-serif; font-size: 40px; font-weight: 600;
-        color: #FFF; text-decoration: none; letter-spacing: 0.1em;
-    }
-    .nav-links { display: flex; gap: 40px; }
-    .nav-link {
-        font-family: 'JetBrains Mono', monospace; font-size: 12px;
-        color: #FFF; text-decoration: none; text-transform: uppercase;
-    }
-    
+
     /* Video Sections */
     .full-video-section {
         position: relative; height: 80vh; overflow: hidden;
@@ -55,17 +38,6 @@
 </style>
 
 <div class="volt-theme">
-<nav class="nav-container">
-    <a href="#" class="logo">{{ section.settings.logo_text | default: 'VOLT⚡' }}</a>
-    <div class="nav-links">
-        {% if section.settings.nav_menu != blank %}
-          {% for link in section.settings.nav_menu.links %}
-            <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
-          {% endfor %}
-        {% endif %}
-    </div>
-    <button style="background:none; border:1px solid #FFF; padding:8px 20px; color:#FFF; font-family:'JetBrains Mono', monospace; cursor:pointer;" onclick="document.getElementById('cart').showModal()">{{ section.settings.cart_text | default: 'CART' }}</button>
-</nav>
 
 <script>
     const lenis = new Lenis();
@@ -188,23 +160,6 @@
     </div>
 </section>
 
-<footer class="big-footer">
-    <div class="footer-top">
-        {% for block in section.blocks %}
-          {% if block.type == 'footer_column' %}
-            <div class="footer-col" {{ block.shopify_attributes }}>
-                <h4>{{ block.settings.column_heading }}</h4>
-                {% if block.settings.column_menu != blank %}
-                  {% for link in block.settings.column_menu.links %}
-                    <a href="{{ link.url }}">{{ link.title }}</a>
-                  {% endfor %}
-                {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-    </div>
-    <div class="footer-brand-title">{{ section.settings.footer_brand | default: 'VOLT ENERGY' }}</div>
-</footer>
 </div>
 
 {% schema %}
@@ -212,28 +167,6 @@
   "name": "Volt Home",
   "max_blocks": 20,
   "settings": [
-    {
-      "type": "header",
-      "content": "Navigation"
-    },
-    {
-      "type": "text",
-      "id": "logo_text",
-      "label": "Logo Text",
-      "default": "VOLT⚡"
-    },
-    {
-      "type": "link_list",
-      "id": "nav_menu",
-      "label": "Navigation Menu",
-      "default": "main-menu"
-    },
-    {
-      "type": "text",
-      "id": "cart_text",
-      "label": "Cart Button Text",
-      "default": "CART"
-    },
     {
       "type": "header",
       "content": "Performance Metrics Section"
@@ -296,16 +229,6 @@
       "max": 12,
       "step": 1,
       "default": 3
-    },
-    {
-      "type": "header",
-      "content": "Footer"
-    },
-    {
-      "type": "text",
-      "id": "footer_brand",
-      "label": "Footer Brand Title",
-      "default": "VOLT ENERGY"
     }
   ],
   "blocks": [
@@ -413,31 +336,12 @@
           "default": "$34.00"
         }
       ]
-    },
-    {
-      "type": "footer_column",
-      "name": "Footer Column",
-      "settings": [
-        {
-          "type": "text",
-          "id": "column_heading",
-          "label": "Column Heading",
-          "default": "// NAVIGATION"
-        },
-        {
-          "type": "link_list",
-          "id": "column_menu",
-          "label": "Column Menu"
-        }
-      ]
     }
   ],
   "presets": [
     {
       "name": "Volt Home",
       "settings": {
-        "logo_text": "VOLT⚡",
-        "cart_text": "CART",
         "stats_video_url": "https://videos.pexels.com/video-files/853813/853813-hd_1920_1080_25fps.mp4",
         "stats_heading": "PERFORMANCE METRICS",
         "products_label": "// CATALOG_V1.0",
@@ -445,8 +349,7 @@
         "storefront_domain": "palashstor.myshopify.com",
         "storefront_token": "7e706483ff729f77a768614acd45fdc0",
         "storefront_country": "US",
-        "products_count": 3,
-        "footer_brand": "VOLT ENERGY"
+        "products_count": 3
       },
       "blocks": [
         {
@@ -526,24 +429,6 @@
           "settings": {
             "product_title": "NEON DRIVE",
             "product_price": "$34.00"
-          }
-        },
-        {
-          "type": "footer_column",
-          "settings": {
-            "column_heading": "// NAVIGATION"
-          }
-        },
-        {
-          "type": "footer_column",
-          "settings": {
-            "column_heading": "// LEGAL"
-          }
-        },
-        {
-          "type": "footer_column",
-          "settings": {
-            "column_heading": "// SOCIAL"
           }
         }
       ]
