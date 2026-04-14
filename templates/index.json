@@ -135,10 +135,10 @@
     "volt_hero_carousel_fPLVXH": {
       "type": "volt-hero-carousel",
       "blocks": {
-        "slide_T49Rjf": {
+        "slide_DwKFxg": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/Flight_through_neon_202604141357.mp4",
+            "video": "shopify://files/videos/Energy_explosion_shockwave_202604141419 (1).mp4",
             "label": "FORMULA 01",
             "headline": "SYSTEMOVERLOAD",
             "tagline": "Original Citrus Blend",
@@ -149,10 +149,10 @@
             "accent_color": ""
           }
         },
-        "slide_DwKFxg": {
+        "slide_T49Rjf": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/Energy_explosion_shockwave_202604141419 (1).mp4",
+            "video": "shopify://files/videos/Flight_through_neon_202604141357.mp4",
             "label": "FORMULA 01",
             "headline": "SYSTEMOVERLOAD",
             "tagline": "Original Citrus Blend",
@@ -179,8 +179,8 @@
         }
       },
       "block_order": [
-        "slide_T49Rjf",
         "slide_DwKFxg",
+        "slide_T49Rjf",
         "slide_jybW3k"
       ],
       "name": "Volt Hero Carousel",
