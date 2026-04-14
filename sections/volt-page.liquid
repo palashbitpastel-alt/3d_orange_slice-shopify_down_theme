@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="{{ 'volt-global.css' | asset_url }}">
+
+<div class="volt-page">
+  <div class="volt-banner">
+    <div class="volt-container">
+      <div class="volt-banner__label">{{ section.settings.label | default: '// PAGE' }}</div>
+      <h1 class="volt-banner__title">{{ page.title }}</h1>
+    </div>
+  </div>
+
+  <section class="volt-section">
+    <div class="volt-container" style="max-width:900px;">
+      <div class="volt-page__content">
+        {{ page.content }}
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'cta_banner' %}
+          <div class="volt-card" style="margin-top:60px; padding:40px; text-align:center;" {{ block.shopify_attributes }}>
+            <h3 style="font-family:var(--font-display); font-size:36px; text-transform:uppercase; margin:0 0 12px;">{{ block.settings.cta_heading }}</h3>
+            <p style="font-family:var(--font-sans); font-size:15px; color:rgba(255,255,255,0.6); margin:0 0 24px;">{{ block.settings.cta_text }}</p>
+            {% if block.settings.cta_url != blank %}
+              <a href="{{ block.settings.cta_url }}" class="volt-btn">{{ block.settings.cta_button | default: 'LEARN MORE' }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<style>
+  .volt-page__content {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+  .volt-page__content h1, .volt-page__content h2, .volt-page__content h3, .volt-page__content h4 {
+    font-family: var(--font-display);
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+  .volt-page__content img {
+    width: 100%;
+    margin: 32px 0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .volt-page__content a {
+    color: var(--color-neon-green);
+  }
+  .volt-page__content blockquote {
+    border-left: 3px solid var(--color-neon-green);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: rgba(255,255,255,0.03);
+    font-style: italic;
+  }
+  .volt-page__content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+  }
+  .volt-page__content th {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--color-neon-green);
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .volt-page__content td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Volt Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Banner Label",
+      "default": "// PAGE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cta_banner",
+      "name": "CTA Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "cta_heading",
+          "label": "Heading",
+          "default": "READY TO FUEL UP?"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Text",
+          "default": "Browse our full range of high-performance energy drinks."
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "cta_button",
+          "label": "Button Text",
+          "default": "LEARN MORE"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Volt Page"
+    }
+  ]
+}
+{% endschema %}

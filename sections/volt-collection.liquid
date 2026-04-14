@@ -1,0 +1,162 @@
+<link rel="stylesheet" href="{{ 'volt-global.css' | asset_url }}">
+
+<div class="volt-page">
+  <!-- Collection Banner -->
+  <div class="volt-banner">
+    <div class="volt-container">
+      <div class="volt-banner__label">{{ section.settings.label | default: '// COLLECTION' }}</div>
+      <h1 class="volt-banner__title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="volt-banner__description">{{ collection.description }}</div>
+      {% endif %}
+      <p style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.4); margin-top:16px;">
+        {{ collection.products_count }} {{ section.settings.count_label | default: 'PRODUCTS FOUND' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Filters & Sort -->
+  {% if section.settings.enable_sorting %}
+    <div class="volt-container" style="padding-top:24px; padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <div class="volt-collection__toolbar">
+        <form>
+          <label class="volt-label" for="volt-sort">SORT BY</label>
+          <select id="volt-sort" class="volt-input" style="width:auto; display:inline-block; min-width:200px;" onchange="window.location.href=this.value">
+            {% for option in collection.sort_options %}
+              <option value="{{ collection.url }}?sort_by={{ option.value }}" {% if collection.sort_by == option.value %}selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Products Grid -->
+  <section class="volt-section">
+    <div class="volt-container">
+      {% if collection.products.size > 0 %}
+        <div class="volt-grid volt-grid--{{ section.settings.columns | default: 4 }}">
+          {% for product in collection.products %}
+            <a href="{{ product.url }}" class="volt-card" style="text-decoration:none;">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}"
+                     style="width:100%; aspect-ratio:3/4; object-fit:contain; filter:drop-shadow(0 0 20px rgba(0,0,0,0.5)); transition:transform 0.4s;"
+                     onmouseover="this.style.transform='scale(1.05) rotate(3deg)'" onmouseout="this.style.transform=''">
+              {% endif %}
+              <div style="margin-top:20px;">
+                {% if product.vendor != blank %}
+                  <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.4); margin:0 0 4px; text-transform:uppercase;">{{ product.vendor }}</p>
+                {% endif %}
+                <div style="font-family:var(--font-display); font-size:24px; color:#fff; text-transform:uppercase;">{{ product.title }}</div>
+                <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-neon-green); margin-top:6px; font-weight:700;">{{ product.price | money }}</div>
+                {% if product.compare_at_price > product.price %}
+                  <span style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.4); text-decoration:line-through; margin-left:8px;">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          {% paginate collection.products by section.settings.products_per_page %}
+            <div class="volt-pagination">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}">&larr;</a>
+              {% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {% else %}
+                  <span class="current">{{ part.title }}</span>
+                {% endif %}
+              {% endfor %}
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}">&rarr;</a>
+              {% endif %}
+            </div>
+          {% endpaginate %}
+        {% endif %}
+      {% else %}
+        <div class="volt-empty">
+          <div class="volt-empty__icon">&#9889;</div>
+          <h2 class="volt-empty__title">{{ section.settings.empty_heading | default: 'NO PRODUCTS' }}</h2>
+          <p class="volt-empty__text">{{ section.settings.empty_text | default: 'This collection is empty.' }}</p>
+          <a href="/" class="volt-btn">{{ section.settings.empty_button | default: 'BACK TO HOME' }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Volt Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Banner Label",
+      "default": "// COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "count_label",
+      "label": "Count Label",
+      "default": "PRODUCTS FOUND"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Grid Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products Per Page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable Sorting",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Empty State"
+    },
+    {
+      "type": "text",
+      "id": "empty_heading",
+      "label": "Empty Heading",
+      "default": "NO PRODUCTS"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty Text",
+      "default": "This collection is empty."
+    },
+    {
+      "type": "text",
+      "id": "empty_button",
+      "label": "Empty Button Text",
+      "default": "BACK TO HOME"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Volt Collection"
+    }
+  ]
+}
+{% endschema %}

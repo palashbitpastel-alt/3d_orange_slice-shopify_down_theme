@@ -1,0 +1,367 @@
+<link rel="stylesheet" href="{{ 'volt-global.css' | asset_url }}">
+
+<div class="volt-page">
+  <section class="volt-section">
+    <div class="volt-container">
+      <div class="volt-product-layout">
+        <!-- Media Gallery -->
+        <div class="volt-product__media">
+          {% for media in product.media %}
+            <div class="volt-product__media-item {% if forloop.first %}active{% endif %}">
+              {% if media.media_type == 'image' %}
+                <img src="{{ media | image_url: width: 800 }}" alt="{{ media.alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              {% elsif media.media_type == 'video' %}
+                {{ media | video_tag: autoplay: true, loop: true, muted: true }}
+              {% else %}
+                {{ media | media_tag }}
+              {% endif %}
+            </div>
+          {% endfor %}
+          {% if product.media.size > 1 %}
+            <div class="volt-product__thumbs">
+              {% for media in product.media %}
+                <button class="volt-product__thumb {% if forloop.first %}active{% endif %}" onclick="voltShowMedia({{ forloop.index0 }})">
+                  <img src="{{ media.preview_image | image_url: width: 100 }}" alt="{{ media.alt | escape }}">
+                </button>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Product Info -->
+        <div class="volt-product__info">
+          <div class="volt-banner__label">{{ section.settings.label | default: '// PRODUCT_DATA' }}</div>
+
+          {% if product.vendor != blank %}
+            <p class="volt-product__vendor">{{ product.vendor }}</p>
+          {% endif %}
+
+          <h1 class="volt-product__title">{{ product.title }}</h1>
+
+          <div class="volt-product__price">
+            {% if product.compare_at_price > product.price %}
+              <span class="volt-product__price--compare">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="volt-product__price--current">{{ product.price | money }}</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="volt-product__price--save">
+                SAVE {{ product.compare_at_price | minus: product.price | money }}
+              </span>
+            {% endif %}
+          </div>
+
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div class="volt-product__option">
+                <label class="volt-label">{{ option.name }}</label>
+                <div class="volt-product__option-values">
+                  {% for value in option.values %}
+                    <button class="volt-product__option-btn {% if option.selected_value == value %}active{% endif %}"
+                            onclick="this.closest('.volt-product__option-values').querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endunless %}
+
+          {%- form 'product', product -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <div class="volt-product__actions">
+              <div class="volt-qty">
+                <button type="button" onclick="this.nextElementSibling.stepDown();this.nextElementSibling.dispatchEvent(new Event('change'))">-</button>
+                <input type="number" name="quantity" value="1" min="1" max="{{ product.selected_or_first_available_variant.inventory_quantity | default: 99 }}">
+                <button type="button" onclick="this.previousElementSibling.stepUp();this.previousElementSibling.dispatchEvent(new Event('change'))">+</button>
+              </div>
+              <button type="submit" class="volt-btn volt-product__add-btn" {% unless product.available %}disabled{% endunless %}>
+                {% if product.available %}
+                  {{ section.settings.add_to_cart_text | default: 'ADD TO CART' }}
+                {% else %}
+                  {{ section.settings.sold_out_text | default: 'SOLD OUT' }}
+                {% endif %}
+              </button>
+            </div>
+          {%- endform -%}
+
+          {% if product.description != blank %}
+            <hr class="volt-divider">
+            <div class="volt-product__description">
+              {{ product.description }}
+            </div>
+          {% endif %}
+
+          {% for block in section.blocks %}
+            {% if block.type == 'info_row' %}
+              <div class="volt-product__info-row" {{ block.shopify_attributes }}>
+                <span class="volt-product__info-label">{{ block.settings.info_label }}</span>
+                <span class="volt-product__info-value">{{ block.settings.info_value }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  {% if section.settings.show_related and recommendations.products.size > 0 %}
+    <section class="volt-section" style="border-top:1px solid rgba(255,255,255,0.1)">
+      <div class="volt-container">
+        <div class="volt-banner__label">{{ section.settings.related_label | default: '// RELATED_ITEMS' }}</div>
+        <h2 class="volt-banner__title" style="font-size:48px; margin-bottom:40px;">{{ section.settings.related_heading | default: 'YOU MAY ALSO LIKE' }}</h2>
+        <div class="volt-grid volt-grid--4">
+          {% for product in recommendations.products limit: section.settings.related_count | default: 4 %}
+            <a href="{{ product.url }}" class="volt-card" style="text-decoration:none;">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" style="width:100%; aspect-ratio:3/4; object-fit:contain;">
+              {% endif %}
+              <div style="margin-top:16px;">
+                <div style="font-family:var(--font-display); font-size:24px; color:#fff; text-transform:uppercase;">{{ product.title }}</div>
+                <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-neon-green); margin-top:4px;">{{ product.price | money }}</div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</div>
+
+<style>
+  .volt-product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .volt-product__media-item { display: none; }
+  .volt-product__media-item.active { display: block; }
+  .volt-product__media-item img, .volt-product__media-item video {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: var(--color-charcoal);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .volt-product__thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    overflow-x: auto;
+  }
+  .volt-product__thumb {
+    width: 64px; height: 64px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--color-charcoal);
+    cursor: pointer;
+    padding: 4px;
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .volt-product__thumb.active, .volt-product__thumb:hover { border-color: var(--color-neon-green); }
+  .volt-product__thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+  .volt-product__vendor {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .volt-product__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.9;
+    margin: 0 0 24px;
+  }
+  .volt-product__price {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .volt-product__price--current {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--color-neon-green);
+  }
+  .volt-product__price--compare {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: line-through;
+  }
+  .volt-product__price--save {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(204,255,0,0.15);
+    color: var(--color-neon-green);
+  }
+  .volt-product__option { margin-bottom: 24px; }
+  .volt-product__option-values { display: flex; flex-wrap: wrap; gap: 8px; }
+  .volt-product__option-btn {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .volt-product__option-btn:hover, .volt-product__option-btn.active {
+    border-color: var(--color-neon-green);
+    color: var(--color-neon-green);
+  }
+  .volt-product__actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .volt-product__add-btn { flex: 1; }
+  .volt-product__description {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+  }
+  .volt-product__description h1, .volt-product__description h2, .volt-product__description h3 {
+    font-family: var(--font-display);
+    color: var(--color-white);
+    text-transform: uppercase;
+  }
+  .volt-product__info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .volt-product__info-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+  .volt-product__info-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-white);
+  }
+  @media (max-width: 768px) {
+    .volt-product-layout { grid-template-columns: 1fr; gap: 30px; }
+  }
+</style>
+
+<script>
+  function voltShowMedia(index) {
+    document.querySelectorAll('.volt-product__media-item').forEach((el,i) => {
+      el.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.volt-product__thumb').forEach((el,i) => {
+      el.classList.toggle('active', i === index);
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Volt Product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "// PRODUCT_DATA"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to Cart Text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold Out Text",
+      "default": "SOLD OUT"
+    },
+    {
+      "type": "header",
+      "content": "Related Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related",
+      "label": "Show Related Products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "related_label",
+      "label": "Related Label",
+      "default": "// RELATED_ITEMS"
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related Heading",
+      "default": "YOU MAY ALSO LIKE"
+    },
+    {
+      "type": "range",
+      "id": "related_count",
+      "label": "Related Products Count",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_row",
+      "name": "Info Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "info_label",
+          "label": "Label",
+          "default": "CAFFEINE"
+        },
+        {
+          "type": "text",
+          "id": "info_value",
+          "label": "Value",
+          "default": "200mg per serving"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Volt Product",
+      "blocks": [
+        {
+          "type": "info_row",
+          "settings": { "info_label": "CAFFEINE", "info_value": "200mg per serving" }
+        },
+        {
+          "type": "info_row",
+          "settings": { "info_label": "SUGAR", "info_value": "Zero" }
+        },
+        {
+          "type": "info_row",
+          "settings": { "info_label": "SERVING SIZE", "info_value": "12 fl oz" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

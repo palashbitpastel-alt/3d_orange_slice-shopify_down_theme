@@ -1,6 +1,6 @@
 // Carousel Logic
 let currentSlide = 0;
-const totalSlides = 3;
+const totalSlides = document.querySelectorAll('.carousel-slide').length || 3;
 let autoplayInterval;
 const AUTOPLAY_DELAY = 6000;
 

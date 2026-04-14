@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="{{ 'volt-global.css' | asset_url }}">
+
+<div class="volt-page">
+  <article class="volt-article">
+    <!-- Hero Image -->
+    {% if article.image %}
+      <div class="volt-article__hero">
+        <img src="{{ article.image | image_url: width: 1600 }}" alt="{{ article.title | escape }}">
+        <div class="volt-article__hero-overlay"></div>
+      </div>
+    {% endif %}
+
+    <div class="volt-container" style="max-width:900px;">
+      <div style="padding:60px 0;">
+        <!-- Meta -->
+        <div class="volt-banner__label">{{ section.settings.label | default: '// TRANSMISSION' }}</div>
+        {% if section.settings.show_date %}
+          <p style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.4); margin:0 0 16px;">
+            {{ article.published_at | date: '%B %d, %Y' | upcase }}
+            {% if section.settings.show_author and article.author != blank %}
+              &mdash; {{ article.author }}
+            {% endif %}
+          </p>
+        {% endif %}
+
+        <h1 class="volt-banner__title" style="margin-bottom:40px;">{{ article.title }}</h1>
+
+        <!-- Tags -->
+        {% if article.tags.size > 0 and section.settings.show_tags %}
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px;">
+            {% for tag in article.tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="volt-tag" style="text-decoration:none;">{{ tag }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Content -->
+        <div class="volt-article__content">
+          {{ article.content }}
+        </div>
+
+        <hr class="volt-divider">
+
+        <!-- Share -->
+        {% if section.settings.show_share %}
+          <div style="display:flex; gap:16px; align-items:center;">
+            <span class="volt-label" style="margin:0;">{{ section.settings.share_text | default: 'SHARE' }}</span>
+            <a href="https://twitter.com/intent/tweet?url={{ article.url | prepend: shop.url }}&text={{ article.title | url_encode }}" target="_blank" class="volt-tag" style="text-decoration:none;">TWITTER</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ article.url | prepend: shop.url }}" target="_blank" class="volt-tag" style="text-decoration:none;">FACEBOOK</a>
+          </div>
+        {% endif %}
+
+        <!-- Comments -->
+        {% if blog.comments_enabled? and section.settings.show_comments %}
+          <hr class="volt-divider">
+          <div class="volt-article__comments">
+            <h3 style="font-family:var(--font-display); font-size:36px; text-transform:uppercase; margin-bottom:30px;">
+              {{ section.settings.comments_heading | default: 'COMMENTS' }} ({{ article.comments_count }})
+            </h3>
+
+            {% for comment in article.comments %}
+              <div class="volt-card" style="margin-bottom:16px;">
+                <p style="font-family:var(--font-mono); font-size:12px; color:var(--color-neon-green); margin:0 0 8px;">
+                  {{ comment.author }} &mdash; {{ comment.created_at | date: '%b %d, %Y' }}
+                </p>
+                <div style="font-family:var(--font-sans); font-size:15px; color:rgba(255,255,255,0.8); line-height:1.6;">
+                  {{ comment.content }}
+                </div>
+              </div>
+            {% endfor %}
+
+            {% form 'new_comment', article %}
+              <div style="margin-top:40px;">
+                <h4 style="font-family:var(--font-display); font-size:24px; text-transform:uppercase; margin-bottom:20px;">
+                  {{ section.settings.leave_comment | default: 'LEAVE A COMMENT' }}
+                </h4>
+                {% if form.errors %}
+                  <div style="padding:16px; border:1px solid #ff4444; margin-bottom:20px; font-family:var(--font-mono); font-size:13px; color:#ff4444;">
+                    {{ form.errors | default_errors }}
+                  </div>
+                {% endif %}
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                  <div>
+                    <label class="volt-label" for="comment-author">NAME</label>
+                    <input type="text" id="comment-author" name="comment[author]" class="volt-input" value="{{ form.author }}" required>
+                  </div>
+                  <div>
+                    <label class="volt-label" for="comment-email">EMAIL</label>
+                    <input type="email" id="comment-email" name="comment[email]" class="volt-input" value="{{ form.email }}" required>
+                  </div>
+                </div>
+                <div style="margin-bottom:16px;">
+                  <label class="volt-label" for="comment-body">COMMENT</label>
+                  <textarea id="comment-body" name="comment[body]" class="volt-textarea" required>{{ form.body }}</textarea>
+                </div>
+                <button type="submit" class="volt-btn">{{ section.settings.submit_text | default: 'POST COMMENT' }}</button>
+              </div>
+            {% endform %}
+          </div>
+        {% endif %}
+
+        <!-- Back to Blog -->
+        <div style="margin-top:60px;">
+          <a href="{{ blog.url }}" class="volt-btn volt-btn--outline">&larr; {{ section.settings.back_text | default: 'BACK TO BLOG' }}</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<style>
+  .volt-article__hero {
+    position: relative;
+    height: 50vh;
+    min-height: 300px;
+    overflow: hidden;
+  }
+  .volt-article__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(1.1);
+  }
+  .volt-article__hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(transparent, var(--color-black));
+  }
+  .volt-article__content {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+  .volt-article__content h1, .volt-article__content h2, .volt-article__content h3, .volt-article__content h4 {
+    font-family: var(--font-display);
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+  .volt-article__content img {
+    width: 100%;
+    margin: 32px 0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .volt-article__content a {
+    color: var(--color-neon-green);
+    text-decoration: underline;
+  }
+  .volt-article__content blockquote {
+    border-left: 3px solid var(--color-neon-green);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: rgba(255,255,255,0.03);
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+  }
+  .volt-article__content ul, .volt-article__content ol {
+    padding-left: 24px;
+    color: rgba(255,255,255,0.7);
+  }
+  .volt-article__content li { margin-bottom: 8px; }
+</style>
+
+{% schema %}
+{
+  "name": "Volt Article",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "// TRANSMISSION"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show Date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show Author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show Tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "Show Share Links",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "share_text",
+      "label": "Share Label",
+      "default": "SHARE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comments",
+      "label": "Show Comments",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "comments_heading",
+      "label": "Comments Heading",
+      "default": "COMMENTS"
+    },
+    {
+      "type": "text",
+      "id": "leave_comment",
+      "label": "Leave Comment Heading",
+      "default": "LEAVE A COMMENT"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "POST COMMENT"
+    },
+    {
+      "type": "text",
+      "id": "back_text",
+      "label": "Back to Blog Text",
+      "default": "BACK TO BLOG"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Volt Article"
+    }
+  ]
+}
+{% endschema %}
