@@ -34,6 +34,86 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Collection Grid Overrides */
+  .card--card, .card--standard {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card--card:hover, .card--standard:hover {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.2) !important;
+    transform: translateY(-4px);
+  }
+  .card__heading, .card__heading a {
+    font-family: 'Teko', sans-serif !important;
+    font-size: 24px !important;
+    text-transform: uppercase;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+  }
+  .price-item, .price-item--regular {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: #ccff00 !important;
+    font-weight: 700;
+  }
+  .card__badge .badge {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    border-radius: 0 !important;
+  }
+  .product-count__text {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,0.4) !important;
+  }
+  /* VOLT: Facets / Filters */
+  .facets-wrapper {
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  .facet-checkbox__text, .facets__label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 13px !important;
+  }
+  .facets__summary span, .facets__selected {
+    font-family: 'JetBrains Mono', monospace !important;
+    text-transform: uppercase;
+  }
+  .active-facets__button {
+    border: 1px solid #ccff00 !important;
+    color: #ccff00 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
+  }
+  /* VOLT: Sort */
+  .collection-sort-filter select {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #FFFFFF !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
+  }
+  /* VOLT: Pagination */
+  .pagination__item a, .pagination__item span {
+    font-family: 'JetBrains Mono', monospace !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 0 !important;
+    color: rgba(255,255,255,0.6) !important;
+  }
+  .pagination__item a:hover {
+    border-color: #ccff00 !important;
+    color: #ccff00 !important;
+  }
+  .pagination__item--current span {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    border-color: #ccff00 !important;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">

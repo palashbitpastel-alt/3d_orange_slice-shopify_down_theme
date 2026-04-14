@@ -12,6 +12,51 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Contact Form Overrides */
+  .contact .title {
+    font-family: 'Teko', sans-serif !important;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #FFFFFF !important;
+  }
+  .contact .field__label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6) !important;
+    letter-spacing: 0.05em;
+  }
+  .contact .field__input, .contact textarea {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #FFFFFF !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 14px !important;
+    border-radius: 0 !important;
+  }
+  .contact .field__input:focus, .contact textarea:focus {
+    border-color: #ccff00 !important;
+    box-shadow: none !important;
+  }
+  .contact .button {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+  .contact .button:hover {
+    background: #FFFFFF !important;
+    box-shadow: 0 0 30px rgba(204,255,0,0.5);
+  }
+  /* VOLT: Success/Error messages */
+  .form-status-list {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 14px !important;
+  }
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">

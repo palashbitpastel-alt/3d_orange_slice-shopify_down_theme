@@ -17,6 +17,69 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Cart Items Overrides */
+  .cart__heading {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(48px, 6vw, 80px) !important;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.9 !important;
+  }
+  cart-items thead th {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    color: rgba(255,255,255,0.4) !important;
+    letter-spacing: 0.05em;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  cart-items td {
+    border-color: rgba(255,255,255,0.06) !important;
+  }
+  .cart-item__name {
+    font-family: 'Teko', sans-serif !important;
+    font-size: 22px !important;
+    text-transform: uppercase;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+  }
+  .cart-item__image {
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 0 !important;
+  }
+  .quantity {
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 0 !important;
+  }
+  .quantity__button {
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+  .quantity__button:hover { background: rgba(255,255,255,0.1) !important; }
+  .quantity__input {
+    color: #FFFFFF !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
+  }
+  .cart-item__price .price, .cart-item__old-price {
+    font-family: 'JetBrains Mono', monospace !important;
+  }
+  cart-remove-button a {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+    color: rgba(255,255,255,0.3) !important;
+    text-transform: uppercase;
+  }
+  cart-remove-button a:hover { color: #ff4444 !important; }
+  /* VOLT: Empty cart */
+  .cart--empty .title {
+    font-family: 'Teko', sans-serif !important;
+    font-size: 48px !important;
+    text-transform: uppercase;
+    font-style: italic;
+  }
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}

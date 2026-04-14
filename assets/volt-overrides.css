@@ -1,0 +1,396 @@
+/* ===================================
+   VOLT DESIGN OVERRIDES
+   Re-skins Dawn theme with dark/neon cyberpunk aesthetic
+   =================================== */
+
+/* ---- Global Body ---- */
+body {
+  background-color: #050505 !important;
+  color: #FFFFFF !important;
+}
+
+/* ---- Typography: Headings → Teko ---- */
+h1, h2, h3, .h0, .h1, .h2, .h3,
+.title, .collection-hero__title,
+.cart__heading, .main-page-title,
+.article-template__title,
+.search__heading {
+  font-family: 'Teko', var(--font-heading-family), sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-style: italic;
+}
+
+/* ---- Typography: Body → Inter ---- */
+body, p, .rte, .article-template__content,
+.product__description, .page-width {
+  font-family: 'Inter', var(--font-body-family), sans-serif;
+}
+
+/* ---- Typography: Mono elements → JetBrains Mono ---- */
+.price, .price-item, .product__tax,
+.cart-item__price, .totals__subtotal-value,
+.facets__label, .facets__selected,
+input, select, textarea,
+.badge, .pagination,
+.cart-item__quantity, .quantity__input,
+.field__label, label,
+.subtitle, .caption, .caption-large {
+  font-family: 'JetBrains Mono', var(--font-body-family), monospace !important;
+}
+
+/* ---- Buttons: Neon green, cut corner ---- */
+.button, .shopify-challenge__button,
+button[type="submit"], .cart__checkout-button,
+.form__submit {
+  background: #ccff00 !important;
+  color: #050505 !important;
+  border: none !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+}
+.button:hover, button[type="submit"]:hover,
+.cart__checkout-button:hover, .form__submit:hover {
+  background: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(204, 255, 0, 0.5);
+}
+
+.button--secondary {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  clip-path: none;
+}
+.button--secondary:hover {
+  border-color: #ccff00 !important;
+  color: #ccff00 !important;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* ---- Links: Neon green accent ---- */
+a:not(.button):hover {
+  color: #ccff00;
+}
+
+/* ---- Cards: Dark glass effect ---- */
+.card, .card-wrapper, .blog-articles__article,
+.collection-product-card, .card--card {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0 !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover, .card-wrapper:hover,
+.blog-articles__article:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+  transform: translateY(-4px);
+}
+
+/* Green top-line on hover */
+.card::after, .card-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: #ccff00;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+.card:hover::after, .card-wrapper:hover::after {
+  transform: scaleX(1);
+}
+
+/* Card text */
+.card__heading, .card__heading a,
+.card-information__text {
+  font-family: 'Teko', sans-serif !important;
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+}
+.price, .price-item--regular, .price-item--sale {
+  color: #ccff00 !important;
+}
+
+/* ---- Inputs/Fields: Dark styled ---- */
+.field__input, .select__select,
+.customer .field input, .form__label,
+input[type="text"], input[type="email"],
+input[type="tel"], input[type="search"],
+input[type="number"], textarea, select {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #FFFFFF !important;
+  border-radius: 0 !important;
+  transition: border-color 0.2s;
+}
+.field__input:focus, input:focus, textarea:focus, select:focus {
+  border-color: #ccff00 !important;
+  box-shadow: none !important;
+}
+::placeholder { color: rgba(255,255,255,0.3) !important; }
+
+/* ---- Header / Nav ---- */
+.header, .section-header {
+  background: #050505 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+.header__heading-link { color: #FFFFFF !important; }
+.header__menu-item, .list-menu__item {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+}
+.header__menu-item:hover, .list-menu__item:hover { color: #ccff00 !important; }
+.header__icon { color: #FFFFFF !important; }
+
+/* ---- Footer ---- */
+.footer, .section-footer {
+  background: #000 !important;
+  border-top: 1px solid rgba(255,255,255,0.1) !important;
+  color: #FFFFFF !important;
+}
+.footer-block__heading {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 14px !important;
+  color: #ccff00 !important;
+  text-transform: uppercase !important;
+}
+.footer a {
+  color: #888 !important;
+  transition: all 0.2s;
+}
+.footer a:hover {
+  color: #FFFFFF !important;
+  padding-left: 5px;
+}
+
+/* ---- Product Page ---- */
+.product__title {
+  font-family: 'Teko', sans-serif !important;
+  font-size: clamp(40px, 5vw, 64px) !important;
+  text-transform: uppercase;
+  font-style: italic;
+  line-height: 0.9 !important;
+}
+.product__info-wrapper {
+  background: transparent !important;
+}
+.product-media-container, .product__media-wrapper {
+  background: #121212 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Variant pills */
+.variant-picker__label {
+  font-family: 'JetBrains Mono', monospace !important;
+  text-transform: uppercase;
+}
+fieldset .product-form__input input[type="radio"] + label {
+  border-color: rgba(255,255,255,0.2) !important;
+  color: rgba(255,255,255,0.7) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  border-radius: 0 !important;
+}
+fieldset .product-form__input input[type="radio"]:checked + label {
+  border-color: #ccff00 !important;
+  color: #ccff00 !important;
+}
+
+/* ---- Cart ---- */
+.cart-items thead th {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.4) !important;
+  letter-spacing: 0.05em;
+}
+.cart-items td {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+.cart-item__name {
+  font-family: 'Teko', sans-serif !important;
+  font-size: 22px !important;
+  text-transform: uppercase;
+}
+.cart-item__image {
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0 !important;
+}
+.totals {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.totals__subtotal-value {
+  font-family: 'Teko', sans-serif !important;
+  font-size: 36px !important;
+  color: #ccff00 !important;
+}
+
+/* Quantity selector */
+.quantity {
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 0 !important;
+}
+.quantity__button {
+  color: #FFFFFF !important;
+  background: transparent !important;
+}
+.quantity__button:hover {
+  background: rgba(255,255,255,0.1) !important;
+}
+
+/* ---- Collection Banner ---- */
+.collection-hero, .collection-banner {
+  background: #050505 !important;
+}
+.collection-hero__title {
+  font-family: 'Teko', sans-serif !important;
+  font-size: clamp(48px, 8vw, 100px) !important;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* ---- Blog ---- */
+.blog-articles__article-image {
+  filter: grayscale(50%) contrast(1.1);
+  transition: filter 0.3s;
+}
+.blog-articles__article:hover .blog-articles__article-image {
+  filter: grayscale(0%) contrast(1);
+}
+.article-card__title {
+  font-family: 'Teko', sans-serif !important;
+  text-transform: uppercase;
+}
+.article-card__info {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  color: rgba(255,255,255,0.4) !important;
+}
+
+/* ---- Article ---- */
+.article-template__hero-container img {
+  filter: grayscale(40%) contrast(1.1);
+}
+.article-template__title {
+  font-family: 'Teko', sans-serif !important;
+  font-size: clamp(40px, 6vw, 80px) !important;
+  text-transform: uppercase;
+  font-style: italic;
+}
+.article-template__content {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+}
+.article-template__content a { color: #ccff00; }
+.article-template__content blockquote {
+  border-left: 3px solid #ccff00 !important;
+  background: rgba(255,255,255,0.03);
+}
+
+/* ---- Search ---- */
+.template-search .field__input {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ---- 404 ---- */
+.shopify-section--404 h1 {
+  font-family: 'Teko', sans-serif !important;
+  font-size: clamp(80px, 15vw, 160px) !important;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* ---- Contact Form ---- */
+.contact__fields .field {
+  margin-bottom: 16px;
+}
+
+/* ---- Pagination ---- */
+.pagination__list {
+  gap: 8px;
+}
+.pagination__item a, .pagination__item span {
+  font-family: 'JetBrains Mono', monospace !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0 !important;
+  color: rgba(255,255,255,0.6) !important;
+  transition: all 0.2s;
+}
+.pagination__item a:hover {
+  border-color: #ccff00 !important;
+  color: #ccff00 !important;
+}
+.pagination__item--current span {
+  background: #ccff00 !important;
+  color: #050505 !important;
+  border-color: #ccff00 !important;
+}
+
+/* ---- Facets / Filters ---- */
+.facets__wrapper {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.facets__label, .facets__selected {
+  color: rgba(255,255,255,0.6) !important;
+}
+.active-facets__button {
+  border-color: #ccff00 !important;
+  color: #ccff00 !important;
+}
+
+/* ---- Announcement Bar ---- */
+.announcement-bar {
+  background: #ccff00 !important;
+  color: #050505 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Drawer / Cart Drawer ---- */
+.drawer, .cart-drawer {
+  background: #0a0a0a !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* ---- Borders & Dividers ---- */
+hr, .divider {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* ---- Badges ---- */
+.badge {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0 !important;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+::-webkit-scrollbar-thumb:hover { background: #ccff00; }
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(204, 255, 0, 0.3);
+  color: #FFFFFF;
+}

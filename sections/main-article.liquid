@@ -1,5 +1,68 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* VOLT: Article Overrides */
+  .article-template__hero-container img {
+    filter: grayscale(40%) contrast(1.1);
+  }
+  .article-template__title {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(40px, 6vw, 80px) !important;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.9 !important;
+    color: #FFFFFF !important;
+  }
+  .article-template__content {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+  .article-template__content a { color: #ccff00; }
+  .article-template__content blockquote {
+    border-left: 3px solid #ccff00 !important;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.03);
+  }
+  .article-template__content h1, .article-template__content h2,
+  .article-template__content h3, .article-template__content h4 {
+    font-family: 'Teko', sans-serif !important;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+  .article-template__content img {
+    border: 1px solid rgba(255,255,255,0.1);
+    margin: 32px 0;
+  }
+  .article-template__back, .article-template__back a {
+    font-family: 'JetBrains Mono', monospace !important;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    color: #ccff00 !important;
+  }
+  .article-template .blog-date,
+  .article-template__date {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,0.4) !important;
+    text-transform: uppercase;
+  }
+  /* Comments */
+  .article-template__comment-item {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 0 !important;
+  }
+  .article-template__comments h2,
+  .article-template__comment-form h2 {
+    font-family: 'Teko', sans-serif !important;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+</style>
+
 <article class="article-template">
   {%- for block in section.blocks -%}
     {%- case block.type -%}

@@ -1,23 +1,96 @@
 <style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
+  .template-404 {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #050505;
+    padding: 80px 20px;
   }
-
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
+  .template-404 .volt-404-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #ccff00;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .template-404 .volt-404-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: #ccff00;
+    box-shadow: 0 0 20px rgba(204,255,0,0.4);
+  }
+  .template-404 .title {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(100px, 20vw, 200px) !important;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 0.85;
+    text-transform: uppercase;
+    font-style: italic;
+    margin: 0 0 16px;
+  }
+  .template-404 .volt-404-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+  }
+  .template-404 .volt-404-glitch {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+  }
+  .template-404 .button {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    border-radius: 0 !important;
+  }
+  .template-404 .button:hover {
+    background: #FFFFFF !important;
+    box-shadow: 0 0 30px rgba(204,255,0,0.5);
+  }
+  .template-404 .volt-btn-outline {
+    display: inline-block;
+    padding: 16px 36px;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-left: 12px;
+    transition: all 0.2s;
+  }
+  .template-404 .volt-btn-outline:hover {
+    border-color: #ccff00;
+    color: #ccff00;
   }
 </style>
 
 <div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+  <div class="volt-404-glitch">ERR::CONNECTION_REFUSED // PACKET_LOSS:100%</div>
+  <div class="volt-404-glitch">TRACE: 0x00000000 >> NULL_POINTER_EXCEPTION</div>
+  <div class="volt-404-glitch">FATAL: ROUTE_NOT_FOUND // RETRY_FAILED</div>
+  <div class="volt-404-label">// ERROR_404</div>
+  <h1 class="title">404</h1>
+  <p class="volt-404-subtext">{{ 'templates.404.subtext' | t }}</p>
+  <div>
+    <a href="{{ routes.root_url }}" class="button">RETURN HOME</a>
+    <a href="{{ routes.all_products_collection_url }}" class="volt-btn-outline">BROWSE PRODUCTS</a>
+  </div>
 </div>

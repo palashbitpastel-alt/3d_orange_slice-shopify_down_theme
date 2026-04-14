@@ -7,11 +7,62 @@
       padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
     }
   }
+
+  /* VOLT: Collection Banner Overrides */
+  .collection-hero {
+    background: #050505 !important;
+    padding: 60px 0 40px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .volt-collection-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #ccff00;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .volt-collection-label::before {
+    content: ''; width: 8px; height: 8px;
+    background: #ccff00;
+    box-shadow: 0 0 20px rgba(204,255,0,0.4);
+  }
+  .collection-hero__title {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(48px, 8vw, 100px) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.9 !important;
+    color: #FFFFFF !important;
+  }
+  .collection-hero__description {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6) !important;
+    max-width: 600px;
+    margin-top: 16px;
+  }
+  .volt-collection-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 16px;
+  }
+  .collection-hero__image-container img {
+    filter: grayscale(40%) contrast(1.1);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 {%- endstyle -%}
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
+      <div class="volt-collection-label">// COLLECTION</div>
       <h1 class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
@@ -20,6 +71,7 @@
       {%- if section.settings.show_collection_description -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>
       {%- endif -%}
+      <p class="volt-collection-count">{{ collection.products_count }} PRODUCTS FOUND</p>
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}

@@ -25,6 +25,58 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Footer Overrides */
+  .footer {
+    background: #000 !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    color: #FFFFFF !important;
+  }
+  .footer-block__heading, .footer-block__heading * {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 14px !important;
+    color: #ccff00 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em;
+  }
+  .footer a, .footer .link, .footer .list-menu__item--link {
+    color: #888 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    transition: all 0.2s;
+  }
+  .footer a:hover, .footer .link:hover {
+    color: #FFFFFF !important;
+    padding-left: 5px;
+  }
+  .footer__content-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+  }
+  .footer .copyright__content, .footer .copyright a {
+    color: rgba(255,255,255,0.3) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+  }
+  /* VOLT: Newsletter in footer */
+  .footer .newsletter-form__field-wrapper .field__input {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #FFFFFF !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
+  }
+  .footer .newsletter-form__field-wrapper .field__input:focus {
+    border-color: #ccff00 !important;
+  }
+  .footer .newsletter-form__button {
+    background: #ccff00 !important;
+    color: #050505 !important;
+  }
+  /* VOLT: Social icons */
+  .footer .social-icons .icon { color: #888 !important; }
+  .footer .social-icons a:hover .icon { color: #ccff00 !important; }
+  /* VOLT: Payment icons */
+  .footer .list-payment .icon { filter: brightness(0) invert(0.5); }
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">

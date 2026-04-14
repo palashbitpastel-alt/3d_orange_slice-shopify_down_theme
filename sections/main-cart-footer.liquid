@@ -15,6 +15,54 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Cart Footer Overrides */
+  .totals {
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  .totals__subtotal {
+    font-family: 'JetBrains Mono', monospace !important;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6) !important;
+  }
+  .totals__subtotal-value {
+    font-family: 'Teko', sans-serif !important;
+    font-size: 42px !important;
+    color: #ccff00 !important;
+    font-weight: 600;
+  }
+  .cart__note label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6) !important;
+  }
+  .cart__note textarea {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #FFFFFF !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border-radius: 0 !important;
+  }
+  .cart__note textarea:focus { border-color: #ccff00 !important; }
+  .cart__checkout-button {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+  .cart__checkout-button:hover {
+    background: #FFFFFF !important;
+    box-shadow: 0 0 30px rgba(204,255,0,0.5);
+  }
+  .tax-note {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,0.4) !important;
+  }
 {%- endstyle -%}
 
 <div
