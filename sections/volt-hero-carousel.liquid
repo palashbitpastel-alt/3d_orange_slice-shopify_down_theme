@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'hero-glitch.css' | asset_url }}">
 <script type="module" src="{{ 'carousel.js' | asset_url }}"></script>
 
-<section class="hero-carousel">
+<section class="hero-carousel" style="margin-top: -80px;">
     <div class="carousel-container">
         {% for block in section.blocks %}
             <div class="carousel-slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
