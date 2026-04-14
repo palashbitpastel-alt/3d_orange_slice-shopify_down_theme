@@ -9,6 +9,14 @@ body {
   color: #FFFFFF !important;
 }
 
+/* ---- Header: ensure full width ---- */
+.section-header {
+  width: 100% !important;
+}
+.header-wrapper {
+  width: 100% !important;
+}
+
 /* ---- Typography: Headings → Teko ---- */
 h1, h2, h3, .h0, .h1, .h2, .h3,
 .title, .collection-hero__title,
