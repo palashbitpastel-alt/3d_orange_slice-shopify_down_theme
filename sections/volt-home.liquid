@@ -56,13 +56,15 @@
 
 <div class="volt-theme">
 <nav class="nav-container">
-    <a href="#" class="logo">VOLT⚡</a>
+    <a href="#" class="logo">{{ section.settings.logo_text | default: 'VOLT⚡' }}</a>
     <div class="nav-links">
-        <a href="#" class="nav-link">Products</a>
-        <a href="#" class="nav-link">Science</a>
-        <a href="#" class="nav-link">Team</a>
+        {% if section.settings.nav_menu != blank %}
+          {% for link in section.settings.nav_menu.links %}
+            <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+          {% endfor %}
+        {% endif %}
     </div>
-    <button style="background:none; border:1px solid #FFF; padding:8px 20px; color:#FFF; font-family:'JetBrains Mono', monospace; cursor:pointer;" onclick="document.getElementById('cart').showModal()">CART</button>
+    <button style="background:none; border:1px solid #FFF; padding:8px 20px; color:#FFF; font-family:'JetBrains Mono', monospace; cursor:pointer;" onclick="document.getElementById('cart').showModal()">{{ section.settings.cart_text | default: 'CART' }}</button>
 </nav>
 
 <script>
@@ -120,22 +122,22 @@
 </section>
 
 <section class="full-video-section">
-    <video class="full-video-bg" autoplay loop muted playsinline src="https://videos.pexels.com/video-files/853813/853813-hd_1920_1080_25fps.mp4"></video>
+    {% if section.settings.stats_video != blank %}
+      <video class="full-video-bg" autoplay loop muted playsinline src="{{ section.settings.stats_video.sources[1].url }}"></video>
+    {% elsif section.settings.stats_video_url != blank %}
+      <video class="full-video-bg" autoplay loop muted playsinline src="{{ section.settings.stats_video_url }}"></video>
+    {% endif %}
     <div class="overlay-content">
-        <h2 class="carousel-headline" style="font-size: 60px;">PERFORMANCE METRICS</h2>
+        <h2 class="carousel-headline" style="font-size: 60px;">{{ section.settings.stats_heading | default: 'PERFORMANCE METRICS' }}</h2>
         <div class="stat-grid">
-            <div class="stat-item">
-                <h3>200<span style="font-size:30px">MG</span></h3>
-                <p>CAFFEINE ANHYDROUS</p>
-            </div>
-            <div class="stat-item">
-                <h3>0<span style="font-size:30px">G</span></h3>
-                <p>SUGAR CONTENT</p>
-            </div>
-            <div class="stat-item">
-                <h3>100<span style="font-size:30px">%</span></h3>
-                <p>FOCUS RETENTION</p>
-            </div>
+            {% for block in section.blocks %}
+              {% if block.type == 'stat' %}
+                <div class="stat-item" {{ block.shopify_attributes }}>
+                    <h3>{{ block.settings.stat_value }}<span style="font-size:30px">{{ block.settings.stat_unit }}</span></h3>
+                    <p>{{ block.settings.stat_label }}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -144,81 +146,168 @@
     <div class="container-volt">
         <div class="section-header">
             <div>
-                <div class="section-label">// CATALOG_V1.0</div>
-                <h2 class="section-headline">SELECT FUEL</h2>
+                <div class="section-label">{{ section.settings.products_label | default: '// CATALOG_V1.0' }}</div>
+                <h2 class="section-headline">{{ section.settings.products_heading | default: 'SELECT FUEL' }}</h2>
             </div>
         </div>
-        
+
         <div class="products-grid">
-            <shopify-store store-domain="palashstor.myshopify.com" public-access-token="7e706483ff729f77a768614acd45fdc0" country="US">
-                <shopify-cart id="cart"></shopify-cart>
-                <shopify-list-context type="product" query="products" first="3">
-                    <template>
-                        <div class="product-card">
-                            <a shopify-attr--href="'/products/' + product.handle" style="text-decoration:none;">
-                                <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?q=80&w=600&auto=format&fit=crop" class="product-card__image" alt="Can">
-                                <div class="product-card__content">
-                                    <div class="product-card__title"><shopify-data query="product.title"></shopify-data></div>
-                                    <div class="product-card__price"><shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money></div>
-                                </div>
-                            </a>
-                        </div>
-                    </template>
-                </shopify-list-context>
-            </shopify-store>
-            
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?w=600" class="product-card__image">
-                <div class="product-card__content">
-                    <div class="product-card__title">SYSTEM OVERLOAD</div>
-                    <div class="product-card__price">$34.00</div>
+            {% if section.settings.storefront_domain != blank and section.settings.storefront_token != blank %}
+              <shopify-store store-domain="{{ section.settings.storefront_domain }}" public-access-token="{{ section.settings.storefront_token }}" country="{{ section.settings.storefront_country | default: 'US' }}">
+                  <shopify-cart id="cart"></shopify-cart>
+                  <shopify-list-context type="product" query="products" first="{{ section.settings.products_count | default: 3 }}">
+                      <template>
+                          <div class="product-card">
+                              <a shopify-attr--href="'/products/' + product.handle" style="text-decoration:none;">
+                                  <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?q=80&w=600&auto=format&fit=crop" class="product-card__image" alt="Can">
+                                  <div class="product-card__content">
+                                      <div class="product-card__title"><shopify-data query="product.title"></shopify-data></div>
+                                      <div class="product-card__price"><shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money></div>
+                                  </div>
+                              </a>
+                          </div>
+                      </template>
+                  </shopify-list-context>
+              </shopify-store>
+            {% endif %}
+
+            {% for block in section.blocks %}
+              {% if block.type == 'product_card' %}
+                <div class="product-card" {{ block.shopify_attributes }}>
+                    {% if block.settings.product_image != blank %}
+                      <img src="{{ block.settings.product_image | image_url: width: 600 }}" class="product-card__image">
+                    {% endif %}
+                    <div class="product-card__content">
+                        <div class="product-card__title">{{ block.settings.product_title }}</div>
+                        <div class="product-card__price">{{ block.settings.product_price }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=600" class="product-card__image" style="filter: hue-rotate(180deg);">
-                <div class="product-card__content">
-                    <div class="product-card__title">CRYOGENIC FREEZE</div>
-                    <div class="product-card__price">$34.00</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1613206472107-b48d885540d9?w=600" class="product-card__image" style="filter: hue-rotate(270deg);">
-                <div class="product-card__content">
-                    <div class="product-card__title">NEON DRIVE</div>
-                    <div class="product-card__price">$34.00</div>
-                </div>
-            </div>
+              {% endif %}
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <footer class="big-footer">
     <div class="footer-top">
-        <div class="footer-col">
-            <h4>// NAVIGATION</h4>
-            <a href="#">Shop All</a>
-            <a href="#">Science</a>
-            <a href="#">Athletes</a>
-        </div>
-        <div class="footer-col">
-            <h4>// LEGAL</h4>
-            <a href="#">Privacy Protocol</a>
-            <a href="#">Terms of Service</a>
-        </div>
-        <div class="footer-col">
-            <h4>// SOCIAL</h4>
-            <a href="#">Instagram</a>
-            <a href="#">TikTok</a>
-        </div>
+        {% for block in section.blocks %}
+          {% if block.type == 'footer_column' %}
+            <div class="footer-col" {{ block.shopify_attributes }}>
+                <h4>{{ block.settings.column_heading }}</h4>
+                {% if block.settings.column_menu != blank %}
+                  {% for link in block.settings.column_menu.links %}
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  {% endfor %}
+                {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
     </div>
-    <div class="footer-brand-title">VOLT ENERGY</div>
+    <div class="footer-brand-title">{{ section.settings.footer_brand | default: 'VOLT ENERGY' }}</div>
 </footer>
 </div>
 
 {% schema %}
 {
   "name": "Volt Home",
-  "max_blocks": 6,
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "VOLT⚡"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Cart Button Text",
+      "default": "CART"
+    },
+    {
+      "type": "header",
+      "content": "Performance Metrics Section"
+    },
+    {
+      "type": "video",
+      "id": "stats_video",
+      "label": "Stats Background Video"
+    },
+    {
+      "type": "url",
+      "id": "stats_video_url",
+      "label": "Stats Video URL (fallback if no upload)"
+    },
+    {
+      "type": "text",
+      "id": "stats_heading",
+      "label": "Stats Section Heading",
+      "default": "PERFORMANCE METRICS"
+    },
+    {
+      "type": "header",
+      "content": "Products Section"
+    },
+    {
+      "type": "text",
+      "id": "products_label",
+      "label": "Products Label",
+      "default": "// CATALOG_V1.0"
+    },
+    {
+      "type": "text",
+      "id": "products_heading",
+      "label": "Products Heading",
+      "default": "SELECT FUEL"
+    },
+    {
+      "type": "text",
+      "id": "storefront_domain",
+      "label": "Storefront Domain",
+      "default": "palashstor.myshopify.com"
+    },
+    {
+      "type": "text",
+      "id": "storefront_token",
+      "label": "Storefront Access Token",
+      "default": "7e706483ff729f77a768614acd45fdc0"
+    },
+    {
+      "type": "text",
+      "id": "storefront_country",
+      "label": "Storefront Country",
+      "default": "US"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Products to Show",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_brand",
+      "label": "Footer Brand Title",
+      "default": "VOLT ENERGY"
+    }
+  ],
   "blocks": [
     {
       "type": "slide",
@@ -277,11 +366,88 @@
           "label": "Accent Color"
         }
       ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_value",
+          "label": "Value",
+          "default": "200"
+        },
+        {
+          "type": "text",
+          "id": "stat_unit",
+          "label": "Unit",
+          "default": "MG"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Label",
+          "default": "CAFFEINE ANHYDROUS"
+        }
+      ]
+    },
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "SYSTEM OVERLOAD"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price",
+          "default": "$34.00"
+        }
+      ]
+    },
+    {
+      "type": "footer_column",
+      "name": "Footer Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "column_heading",
+          "label": "Column Heading",
+          "default": "// NAVIGATION"
+        },
+        {
+          "type": "link_list",
+          "id": "column_menu",
+          "label": "Column Menu"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Volt Home",
+      "settings": {
+        "logo_text": "VOLT⚡",
+        "cart_text": "CART",
+        "stats_video_url": "https://videos.pexels.com/video-files/853813/853813-hd_1920_1080_25fps.mp4",
+        "stats_heading": "PERFORMANCE METRICS",
+        "products_label": "// CATALOG_V1.0",
+        "products_heading": "SELECT FUEL",
+        "storefront_domain": "palashstor.myshopify.com",
+        "storefront_token": "7e706483ff729f77a768614acd45fdc0",
+        "storefront_country": "US",
+        "products_count": 3,
+        "footer_brand": "VOLT ENERGY"
+      },
       "blocks": [
         {
           "type": "slide",
@@ -315,6 +481,69 @@
             "tagline": "Grape Electrolyte",
             "description": "Rapid hydration matrix designed for physical endurance and recovery.",
             "button_text": "INITIATE ORDER"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": "200",
+            "stat_unit": "MG",
+            "stat_label": "CAFFEINE ANHYDROUS"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": "0",
+            "stat_unit": "G",
+            "stat_label": "SUGAR CONTENT"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": "100",
+            "stat_unit": "%",
+            "stat_label": "FOCUS RETENTION"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "product_title": "SYSTEM OVERLOAD",
+            "product_price": "$34.00"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "product_title": "CRYOGENIC FREEZE",
+            "product_price": "$34.00"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "product_title": "NEON DRIVE",
+            "product_price": "$34.00"
+          }
+        },
+        {
+          "type": "footer_column",
+          "settings": {
+            "column_heading": "// NAVIGATION"
+          }
+        },
+        {
+          "type": "footer_column",
+          "settings": {
+            "column_heading": "// LEGAL"
+          }
+        },
+        {
+          "type": "footer_column",
+          "settings": {
+            "column_heading": "// SOCIAL"
           }
         }
       ]
