@@ -74,71 +74,48 @@
 <section class="hero-carousel">
     <div class="carousel-container">
         
-        <div class="carousel-slide active">
-            <video class="carousel-video" autoplay loop muted playsinline src="{{ 'Energy_explosion_shockwave_202604141419.mp4' | asset_url }}"></video>
-            <div class="carousel-content-split">
-                <div class="hero-top-left">
-                    <div class="carousel-label">FORMULA 01</div>
-                    <h1 class="carousel-headline">SYSTEM<br>OVERLOAD</h1>
-                </div>
-                <div class="hero-bottom-right">
-                    <p class="carousel-tagline">Original Citrus Blend</p>
-                    <p class="carousel-description">200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.</p>
-                    <div class="carousel-price">
-                        <span class="price-amount">$34</span><span class="price-unit">/ 12 Pack</span>
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' %}
+            <div class="carousel-slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+                {% if block.settings.video != blank %}
+                  <video class="carousel-video" {% if forloop.first %}autoplay{% endif %} loop muted playsinline src="{{ block.settings.video.sources[1].url }}"></video>
+                {% endif %}
+                <div class="carousel-content-split">
+                    <div class="hero-top-left">
+                        <div class="carousel-label" {% if block.settings.accent_color != blank %}style="color:{{ block.settings.accent_color }}"{% endif %}>{{ block.settings.label }}</div>
+                        <h1 class="carousel-headline">{{ block.settings.headline }}</h1>
                     </div>
-                    <div class="carousel-cta">
-                        <button class="btn-primary" onclick="scrollToProducts()">INITIATE ORDER</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-slide">
-            <video class="carousel-video" loop muted playsinline src="{{ 'Blue_ice_freezing_202604141348.mp4' | asset_url }}"></video>
-            <div class="carousel-content-split">
-                <div class="hero-top-left">
-                    <div class="carousel-label" style="color:var(--color-electric-blue)">FORMULA 02</div>
-                    <h1 class="carousel-headline">CRYOGENIC<br>FREEZE</h1>
-                </div>
-                <div class="hero-bottom-right">
-                    <p class="carousel-tagline">Blue Raspberry Ice</p>
-                    <p class="carousel-description">Enhanced with Nootropics for laser focus during extended gaming or coding sessions.</p>
-                    <div class="carousel-price">
-                        <span class="price-amount">$34</span><span class="price-unit">/ 12 Pack</span>
-                    </div>
-                    <div class="carousel-cta">
-                        <button class="btn-primary" style="background:var(--color-electric-blue)" onclick="scrollToProducts()">INITIATE ORDER</button>
+                    <div class="hero-bottom-right">
+                        {% if block.settings.tagline != blank %}
+                          <p class="carousel-tagline">{{ block.settings.tagline }}</p>
+                        {% endif %}
+                        {% if block.settings.description != blank %}
+                          <p class="carousel-description">{{ block.settings.description }}</p>
+                        {% endif %}
+                        {% if block.settings.price != blank %}
+                          <div class="carousel-price">
+                              <span class="price-amount">{{ block.settings.price }}</span>{% if block.settings.price_unit != blank %}<span class="price-unit">/ {{ block.settings.price_unit }}</span>{% endif %}
+                          </div>
+                        {% endif %}
+                        <div class="carousel-cta">
+                            <button class="btn-primary" {% if block.settings.accent_color != blank %}style="background:{{ block.settings.accent_color }}; color:#FFF;"{% endif %} onclick="scrollToProducts()">{{ block.settings.button_text | default: 'INITIATE ORDER' }}</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="carousel-slide">
-            <video class="carousel-video" loop muted playsinline src="{{ 'Flight_through_neon_202604141357.mp4' | asset_url }}"></video>
-            <div class="carousel-content-split">
-                <div class="hero-top-left">
-                    <div class="carousel-label" style="color:var(--color-cyber-purple)">FORMULA 03</div>
-                    <h1 class="carousel-headline">NEON<br>DRIVE</h1>
-                </div>
-                <div class="hero-bottom-right">
-                    <p class="carousel-tagline">Grape Electrolyte</p>
-                    <p class="carousel-description">Rapid hydration matrix designed for physical endurance and recovery.</p>
-                    <div class="carousel-cta">
-                        <button class="btn-primary" style="background:var(--color-cyber-purple); color:#FFF;" onclick="scrollToProducts()">INITIATE ORDER</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+          {% endif %}
+        {% endfor %}
 
     </div>
 
     <button class="carousel-nav carousel-nav--prev" onclick="prevSlide()">&larr;</button>
     <button class="carousel-nav carousel-nav--next" onclick="nextSlide()">&rarr;</button>
     <div class="carousel-pagination">
-        <button class="pagination-dot active" onclick="goToSlide(0)"></button>
-        <button class="pagination-dot" onclick="goToSlide(1)"></button>
-        <button class="pagination-dot" onclick="goToSlide(2)"></button>
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' %}
+            <button class="pagination-dot {% if forloop.first %}active{% endif %}" onclick="goToSlide({{ forloop.index0 }})"></button>
+          {% endif %}
+        {% endfor %}
     </div>
 </section>
 
@@ -241,9 +218,106 @@
 {% schema %}
 {
   "name": "Volt Home",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero Slide",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Background Video"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Slide Label",
+          "default": "FORMULA 01"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "SYSTEM<br>OVERLOAD"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "default": "Original Citrus Blend"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$34"
+        },
+        {
+          "type": "text",
+          "id": "price_unit",
+          "label": "Price Unit",
+          "default": "12 Pack"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "INITIATE ORDER"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent Color"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Volt Home"
+      "name": "Volt Home",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 01",
+            "headline": "SYSTEM<br>OVERLOAD",
+            "tagline": "Original Citrus Blend",
+            "description": "200mg Caffeine. Zero Sugar. The industry standard for high-performance neural activation.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 02",
+            "headline": "CRYOGENIC<br>FREEZE",
+            "tagline": "Blue Raspberry Ice",
+            "description": "Enhanced with Nootropics for laser focus during extended gaming or coding sessions.",
+            "price": "$34",
+            "price_unit": "12 Pack",
+            "button_text": "INITIATE ORDER"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "FORMULA 03",
+            "headline": "NEON<br>DRIVE",
+            "tagline": "Grape Electrolyte",
+            "description": "Rapid hydration matrix designed for physical endurance and recovery.",
+            "button_text": "INITIATE ORDER"
+          }
+        }
+      ]
     }
   ]
 }
