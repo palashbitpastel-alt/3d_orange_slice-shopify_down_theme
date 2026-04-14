@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="{{ 'products.css' | asset_url }}">
-<script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
 
 <section id="products" class="products-section">
     <div class="container-volt">
@@ -11,36 +10,23 @@
         </div>
 
         <div class="products-grid">
-            {% if section.settings.storefront_domain != blank and section.settings.storefront_token != blank %}
-              <shopify-store store-domain="{{ section.settings.storefront_domain }}" public-access-token="{{ section.settings.storefront_token }}" country="{{ section.settings.storefront_country | default: 'US' }}">
-                  <shopify-cart id="cart"></shopify-cart>
-                  <shopify-list-context type="product" query="products" first="{{ section.settings.products_count | default: 3 }}">
-                      <template>
-                          <div class="product-card">
-                              <a shopify-attr--href="'/products/' + product.handle" style="text-decoration:none;">
-                                  <img src="https://images.unsplash.com/photo-1622543925917-095a35c9704d?q=80&w=600&auto=format&fit=crop" class="product-card__image" alt="Can">
-                                  <div class="product-card__content">
-                                      <div class="product-card__title"><shopify-data query="product.title"></shopify-data></div>
-                                      <div class="product-card__price"><shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money></div>
-                                  </div>
-                              </a>
-                          </div>
-                      </template>
-                  </shopify-list-context>
-              </shopify-store>
-            {% endif %}
-
-            {% for block in section.blocks %}
-                <div class="product-card" {{ block.shopify_attributes }}>
-                    {% if block.settings.image != blank %}
-                      <img src="{{ block.settings.image | image_url: width: 600 }}" class="product-card__image">
+            {% if section.settings.collection != blank %}
+              {% for product in section.settings.collection.products limit: section.settings.products_count %}
+                <a href="{{ product.url }}" class="product-card" style="text-decoration:none;">
+                    {% if product.featured_image %}
+                      <img src="{{ product.featured_image | image_url: width: 600 }}" class="product-card__image" alt="{{ product.title | escape }}">
                     {% endif %}
                     <div class="product-card__content">
-                        <div class="product-card__title">{{ block.settings.title }}</div>
-                        <div class="product-card__price">{{ block.settings.price }}</div>
+                        <div class="product-card__title">{{ product.title }}</div>
+                        <div class="product-card__price">{{ product.price | money }}</div>
                     </div>
-                </div>
-            {% endfor %}
+                </a>
+              {% endfor %}
+            {% else %}
+              <p style="font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(255,255,255,0.4); grid-column:1/-1; text-align:center; padding:60px 0;">
+                Select a collection in the section settings to display products.
+              </p>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -48,7 +34,6 @@
 {% schema %}
 {
   "name": "Volt Products",
-  "max_blocks": 12,
   "settings": [
     {
       "type": "text",
@@ -63,22 +48,9 @@
       "default": "SELECT FUEL"
     },
     {
-      "type": "text",
-      "id": "storefront_domain",
-      "label": "Storefront Domain",
-      "default": "palashstor.myshopify.com"
-    },
-    {
-      "type": "text",
-      "id": "storefront_token",
-      "label": "Storefront Access Token",
-      "default": "7e706483ff729f77a768614acd45fdc0"
-    },
-    {
-      "type": "text",
-      "id": "storefront_country",
-      "label": "Storefront Country",
-      "default": "US"
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
     },
     {
       "type": "range",
@@ -90,39 +62,9 @@
       "default": 3
     }
   ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Product Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Product Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "SYSTEM OVERLOAD"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price",
-          "default": "$34.00"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Volt Products",
-      "blocks": [
-        { "type": "card", "settings": { "title": "SYSTEM OVERLOAD", "price": "$34.00" } },
-        { "type": "card", "settings": { "title": "CRYOGENIC FREEZE", "price": "$34.00" } },
-        { "type": "card", "settings": { "title": "NEON DRIVE", "price": "$34.00" } }
-      ]
+      "name": "Volt Products"
     }
   ]
 }
