@@ -71,21 +71,55 @@
     }
   }
 
-  /* VOLT: Header Overrides */
+  /* VOLT: Transparent Glassmorphism Header */
   .section-header {
-    background: #050505 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 16px 24px !important;
+    pointer-events: none;
+  }
+  .section-header > * {
+    pointer-events: auto;
+  }
+  .header-wrapper {
+    background: transparent !important;
+    border: none !important;
   }
   .header {
-    background: #050505 !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 0.5px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 100px !important;
+    padding: 8px 30px !important;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 60px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* Scrolled state — slightly more opaque */
+  .shopify-section-header-sticky .header {
+    background: rgba(0, 0, 0, 0.7) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  /* Offset body for fixed header */
+  .content-for-layout {
+    padding-top: 0 !important;
   }
   .header__heading-link, .header__heading-link .h2 {
     font-family: 'Teko', sans-serif !important;
-    font-size: 40px !important;
+    font-size: 36px !important;
     font-weight: 600 !important;
     color: #FFFFFF !important;
     letter-spacing: 0.1em;
     text-decoration: none !important;
+    line-height: 1;
   }
   .header__menu-item, .list-menu__item--link,
   .header__menu-item span {
@@ -94,12 +128,14 @@
     color: #FFFFFF !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em;
+    transition: color 0.2s;
   }
   .header__menu-item:hover, .list-menu__item--link:hover {
     color: #ccff00 !important;
   }
   .header__icon {
     color: #FFFFFF !important;
+    transition: color 0.2s;
   }
   .header__icon:hover {
     color: #ccff00 !important;
@@ -143,6 +179,7 @@
     background: #121212 !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     color: #FFFFFF !important;
+    border-radius: 16px !important;
   }
   .predictive-search__heading {
     font-family: 'JetBrains Mono', monospace !important;
@@ -153,6 +190,22 @@
     font-family: 'Teko', sans-serif !important;
     text-transform: uppercase;
     color: #FFFFFF !important;
+  }
+  /* VOLT: Announcement bar inside glass header */
+  .announcement-bar {
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+  /* Mobile adjustments */
+  @media screen and (max-width: 989px) {
+    .section-header {
+      padding: 10px 12px !important;
+    }
+    .header {
+      height: 52px;
+      padding: 6px 16px !important;
+      border-radius: 60px !important;
+    }
   }
 </style>
 
