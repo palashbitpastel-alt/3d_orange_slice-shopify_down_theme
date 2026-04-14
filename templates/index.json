@@ -192,6 +192,7 @@
         "card_nPBTEd": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Whisk_1864eb9fbdd91409f9d47ecd5730dc1bdr.jpg",
             "title": "SYSTEM OVERLOAD",
             "price": "$34.00"
           }
