@@ -2,6 +2,61 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* VOLT: Slideshow Overrides */
+  .slideshow .banner__heading {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(60px, 10vw, 140px) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.85 !important;
+  }
+  .slideshow .banner__text {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.7);
+  }
+  .slideshow .button--primary {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+  .slideshow .button--primary:hover {
+    background: #FFFFFF !important;
+    box-shadow: 0 0 30px rgba(204,255,0,0.5);
+  }
+  .slideshow .slider-button {
+    background: rgba(0,0,0,0.5) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: #FFFFFF !important;
+    border-radius: 0 !important;
+  }
+  .slideshow .slider-button:hover {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    border-color: #ccff00 !important;
+  }
+  .slideshow .slider-counter {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: rgba(255,255,255,0.5);
+  }
+  .slideshow .slider-counter--dots .slider-counter__link {
+    background: rgba(255,255,255,0.2) !important;
+    border-radius: 0 !important;
+  }
+  .slideshow .slider-counter--dots .slider-counter__link--active {
+    background: #ccff00 !important;
+    box-shadow: 0 0 20px rgba(204,255,0,0.4);
+  }
+</style>
+
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {

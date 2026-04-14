@@ -36,6 +36,45 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* VOLT: Featured Collection Overrides */
+  .collection .title {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(36px, 5vw, 64px) !important;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #FFFFFF !important;
+  }
+  .collection .card--card, .collection .card--standard {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .collection .card--card:hover, .collection .card--standard:hover {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.2) !important;
+    transform: translateY(-4px);
+  }
+  .collection .card__heading, .collection .card__heading a {
+    font-family: 'Teko', sans-serif !important;
+    font-size: 24px !important;
+    text-transform: uppercase;
+    color: #FFFFFF !important;
+  }
+  .collection .price-item {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: #ccff00 !important;
+    font-weight: 700;
+  }
+  .collection .button, .collection .view-all a {
+    font-family: 'JetBrains Mono', monospace !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em;
+    border-radius: 0 !important;
+  }
 {%- endstyle -%}
 
 {%- liquid

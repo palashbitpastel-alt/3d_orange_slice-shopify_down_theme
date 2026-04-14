@@ -1,5 +1,47 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* VOLT: Image Banner Overrides */
+  .banner__heading {
+    font-family: 'Teko', sans-serif !important;
+    font-size: clamp(60px, 10vw, 140px) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.85 !important;
+    letter-spacing: -0.02em;
+  }
+  .banner__text {
+    font-family: 'Inter', sans-serif;
+    color: rgba(255,255,255,0.8);
+  }
+  .banner .button {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em;
+    border-radius: 0 !important;
+  }
+  .banner .button--primary {
+    background: #ccff00 !important;
+    color: #050505 !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+  .banner .button--primary:hover {
+    background: #FFFFFF !important;
+    box-shadow: 0 0 30px rgba(204,255,0,0.5);
+  }
+  .banner .button--secondary {
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+  }
+  .banner .button--secondary:hover {
+    border-color: #ccff00 !important;
+    color: #ccff00 !important;
+  }
+</style>
+
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {
